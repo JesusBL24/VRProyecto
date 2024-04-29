@@ -1,0 +1,9 @@
+UI sobre todo: https://youtu.be/uGJ1L0xnEb4?si=1QiKCptuvtQp-8XV
+Barra de vida: https://youtu.be/_lREXfAMUcE?si=HpOg9yoKum8pdHm9
+Shaders:https://assetstore.unity.com/packages/vfx/shaders/sci-fi-hologram-shader-66455
+Sonidos:
+Disparo: https://pixabay.com/es/users/pixabay-1/
+Voz IA: https://elevenlabs.io/text-to-speech
+Filtro mas usado: https://elevenlabs.io/text-to-speech
+Reducir velocidad de audios: https://audiotrimmer.com/audio-speed-changer/
+
