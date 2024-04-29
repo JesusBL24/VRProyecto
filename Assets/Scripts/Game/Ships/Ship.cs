@@ -19,7 +19,7 @@ public abstract class Ship : MonoBehaviour
     
     [SerializeField] protected string _shipType;
 
-    protected AudioEffector _speaker;
+    protected AudioHandler _speaker;
     
     //Atributos de movimiento
     [SerializeField] protected float _speed;
@@ -44,9 +44,14 @@ public abstract class Ship : MonoBehaviour
         return _shipType;
     }
 
-    public float GetHeatlh()
+    public float GetMaxHeatlh()
     {
         return _maxHealth;
+    }
+    
+    public float GetActualHeatlh()
+    {
+        return _actualHealth;
     }
 
     protected void Start()
@@ -71,7 +76,7 @@ public abstract class Ship : MonoBehaviour
         _attackRangeSphere.GetComponent<MeshRenderer>().material = _attackRangeMaterial; //Asocia el material 
         _attackRangeSphere.SetActive(false);
 
-        _speaker = gameObject.GetComponent<AudioEffector>();
+        _speaker = gameObject.GetComponent<AudioHandler>();
     }
     
 
@@ -151,8 +156,11 @@ public abstract class Ship : MonoBehaviour
     //Selecciona al enemigo a atacar
     public void Attack(GameObject target)
     {
-        _attackTarget = target;
-        _isTravellingToNavPoint = false;
+        if (target != null)
+        {
+            _attackTarget = target;
+            _isTravellingToNavPoint = false;
+        }
     }
 
     //Función para disparar al enemigo cuando está a rango

@@ -7,10 +7,8 @@ using UnityEngine.Serialization;
 
 public class ShipsManager : ASingleton<ShipsManager>
 {
-    [SerializeField] public AllyShip SelectedAllyShip = null;
-    [SerializeField] public EnemyShip SelectedEnemyShip = null;
-    [SerializeField] private TextMeshProUGUI allyText;
-    [SerializeField] private TextMeshProUGUI enemyText;
+    [SerializeField] public AllyShip selectedAllyShip = null;
+    [SerializeField] public EnemyShip selectedEnemyShip = null;
 
     [HideInInspector] public List<AllyShip> _allyShips;
     [HideInInspector] public List<EnemyShip> _enemyShips;
@@ -23,16 +21,14 @@ public class ShipsManager : ASingleton<ShipsManager>
     {
         if (ship is AllyShip)
         {
-            SelectedAllyShip = (AllyShip)ship;
-            allyText.text = ship.GetShipType();
+            selectedAllyShip = (AllyShip)ship;
         }
         else
         {
-            SelectedEnemyShip = (EnemyShip)ship;
-            enemyText.text = ship.GetShipType() + ship.GetHeatlh();
-            if (SelectedAllyShip != null)
+            selectedEnemyShip = (EnemyShip)ship;
+            if (selectedAllyShip != null)
             {
-                SelectedAllyShip.Attack(SelectedEnemyShip.gameObject);
+                selectedAllyShip.Attack(selectedEnemyShip.gameObject);
             }
         }
     }

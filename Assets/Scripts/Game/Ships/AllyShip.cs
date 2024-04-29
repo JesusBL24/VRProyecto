@@ -12,7 +12,6 @@ public class AllyShip : Ship
     }
     public void MoveToNavPoint(Transform newPositionTransform)
     {
-        _speaker.PlayFlying();
         if(_navPoint != null){Destroy(_navPoint); }
         
         var navPoint = GameObject.CreatePrimitive(PrimitiveType.Cube);

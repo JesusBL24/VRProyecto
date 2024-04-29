@@ -790,6 +790,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateRecognition",
+                    "type": "PassThrough",
+                    "id": "80527423-7b3b-4422-89a3-e3a79cfe83ac",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -966,6 +975,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveShip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49cc00a7-ed5e-480e-a8fc-b13c9179315a",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateRecognition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1666,6 +1686,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateRecognition",
+                    "type": "PassThrough",
+                    "id": "30edf9cf-81d9-4e44-8a3b-b62104f00567",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1842,6 +1871,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveShip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af7fe3f8-a2e9-42bf-a486-e334c965c950",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateRecognition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -2025,7 +2065,7 @@
                 {
                     "name": "",
                     "id": "ca96a9c6-18ec-4d37-80f6-4bd5db6de3af",
-                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "path": "<XRController>{RightHand}/{Primary2DAxisClick}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -56,7 +56,6 @@ public class PCanon: MonoBehaviour
     }
     private void Shot()
     {
-        _audioSource.Play();
         ShotHapticFeedback();
         // Obtener la rotación hacia el objetivo
         Quaternion rotation = Quaternion.LookRotation(_target.transform.position - transform.position, Vector3.up);
