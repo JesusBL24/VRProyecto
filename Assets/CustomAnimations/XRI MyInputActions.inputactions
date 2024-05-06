@@ -1,5 +1,5 @@
 {
-    "name": "XRI Default Input Actions",
+    "name": "XRI MyInputActions",
     "maps": [
         {
             "name": "XRI Head",
@@ -443,6 +443,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CheckSecondary",
+                    "type": "Button",
+                    "id": "ab6e8481-3fca-4eae-bf4e-47cf7875e9e7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheckPrimary",
+                    "type": "Button",
+                    "id": "0f253902-4a51-44e9-b9c2-1b960915cd17",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheckGrip",
+                    "type": "Button",
+                    "id": "b7491453-a70e-46d0-9e31-4f628087f420",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheckTrigger",
+                    "type": "Button",
+                    "id": "575686ce-b1ab-400e-88e4-7a13e882eca0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -676,6 +712,50 @@
                     "action": "Grip Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dcd342e4-8748-480a-91db-f91c9896c145",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheckSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21a451dc-4130-40ab-bef1-626d975cf7c8",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheckPrimary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "814f9aaf-5bef-4f70-ad3c-e5d7ff9ea1d4",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheckGrip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ebcd54f2-d99c-443f-a00d-bbaa0aa4a26e",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheckTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -685,9 +765,9 @@
             "actions": [
                 {
                     "name": "Select",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "33754c03-48ec-46ef-9bc6-22ed6bfdd8e8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -781,6 +861,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ActivateRecognition",
+                    "type": "PassThrough",
+                    "id": "435e1bca-7136-4d5d-a1d2-1b39e8e11367",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateRayInteractor",
+                    "type": "Button",
+                    "id": "e979f7cf-e5be-4579-82d3-4c1ee02e1ad8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -809,7 +907,7 @@
                 {
                     "name": "",
                     "id": "49a23327-a116-48c0-8af9-0d2c50c15a88",
-                    "path": "<XRController>{LeftHand}/{Grip}",
+                    "path": "<XRController>{LeftHand}/{Trigger}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -831,7 +929,7 @@
                 {
                     "name": "",
                     "id": "487f4f2e-9e9b-49aa-b0f2-4037a24624f5",
-                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -842,7 +940,7 @@
                 {
                     "name": "",
                     "id": "3b8b1b59-2fdc-4998-8259-50341075d9a2",
-                    "path": "<XRController>{LeftHand}/{Trigger}",
+                    "path": "<XRController>{LeftHand}/{Grip}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -946,6 +1044,28 @@
                     "processors": "ScaleVector2(x=0),StickDeadzone",
                     "groups": "Generic XR Controller",
                     "action": "Scale Delta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59acbc5a-9e7c-42de-bec2-9119bea6ea69",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateRecognition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9a82b21a-830b-4321-9d01-7a39d5a5086c",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateRayInteractor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1241,9 +1361,36 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "My action",
+                    "name": "CheckSecondary",
                     "type": "Button",
-                    "id": "49dbf89f-ee3f-41bf-9067-e64a73f53d6a",
+                    "id": "1dc5eeb9-af03-44da-b9ab-02636856c55d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheckPrimary",
+                    "type": "Button",
+                    "id": "a0a6af4f-58d8-4e14-abbe-2bdfecb282ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheckGrip",
+                    "type": "Button",
+                    "id": "e97a217b-aa2d-45ab-a1b1-f8c0ee265941",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheckTrigger",
+                    "type": "Button",
+                    "id": "86c9fa34-3b0c-4275-a1d1-c4f648698540",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1484,12 +1631,45 @@
                 },
                 {
                     "name": "",
-                    "id": "0b1b893e-a07b-452d-8e11-e2a45b463ce1",
+                    "id": "0784238f-09ce-4274-8818-52a34cd1848f",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheckSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "894607fe-4625-4779-9bde-2cc16de3aeff",
                     "path": "<XRController>{RightHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "My action",
+                    "action": "CheckPrimary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a788a56-0804-445d-bb91-f547d6268b88",
+                    "path": "<XRController>{RightHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheckGrip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25743b34-ea7c-483f-8203-b8f7790a18a0",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheckTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1597,6 +1777,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ActivateRecognition",
+                    "type": "PassThrough",
+                    "id": "38a9c2f3-cd3d-452a-8ae5-9fae7eb800a9",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateRayInteractor",
+                    "type": "Button",
+                    "id": "2bd99d02-bf02-46ff-9814-0cd4acd52e29",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1625,7 +1823,7 @@
                 {
                     "name": "",
                     "id": "dd433817-216c-46b9-8dd3-f3a4ea1767b9",
-                    "path": "<XRController>{RightHand}/{Grip}",
+                    "path": "<XRController>{RightHand}/{Trigger}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -1647,7 +1845,7 @@
                 {
                     "name": "",
                     "id": "fa59aed1-ae0b-4074-a58c-294b85f46228",
-                    "path": "<XRController>{RightHand}/{TriggerButton}",
+                    "path": "<XRController>{RightHand}/{GripButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -1658,7 +1856,7 @@
                 {
                     "name": "",
                     "id": "150f414f-61bf-47b1-b4f8-f772a2a40565",
-                    "path": "<XRController>{RightHand}/{Trigger}",
+                    "path": "<XRController>{RightHand}/{Grip}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -1764,6 +1962,28 @@
                     "action": "Scale Delta",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a374ce0-eea9-44fc-971c-3848d96202b0",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateRecognition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a8ff1ce-bcb0-4654-b41b-91034355106d",
+                    "path": "<XRController>{RightHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateRayInteractor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -1844,9 +2064,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Teleportation",
+                    "name": "ActivateTeleport",
                     "type": "Button",
-                    "id": "722a705f-82df-4384-ba49-c2d5f6db413d",
+                    "id": "ce7559f2-90e0-4eb6-b951-afb7dc474ed8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1944,12 +2164,12 @@
                 },
                 {
                     "name": "",
-                    "id": "ca96a9c6-18ec-4d37-80f6-4bd5db6de3af",
-                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "id": "92b5b8fb-541c-4d54-9011-14a723a153aa",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Teleportation",
+                    "action": "ActivateTeleport",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

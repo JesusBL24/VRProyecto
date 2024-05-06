@@ -13,7 +13,7 @@ public class PCanon: MonoBehaviour
 
     public bool isActive;   //Indica si el Cañon activo
 
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioHandler _speaker;
     
     [SerializeField] private XRBaseControllerInteractor _leftHand;
     [FormerlySerializedAs("_RightHand")] [SerializeField] private XRBaseControllerInteractor _rightHand;
@@ -57,6 +57,7 @@ public class PCanon: MonoBehaviour
     private void Shot()
     {
         ShotHapticFeedback();
+        _speaker.PlayClip(0);
         // Obtener la rotación hacia el objetivo
         Quaternion rotation = Quaternion.LookRotation(_target.transform.position - transform.position, Vector3.up);
         

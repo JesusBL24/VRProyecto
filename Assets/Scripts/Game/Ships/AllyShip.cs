@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AllyShip : Ship
 {
+    private LineRenderer _lineRenderer;
     void Start()
     {
+        _lineRenderer = gameObject.GetComponent<LineRenderer>();
         faction = 0;
-        ShipsManager.Instance._allyShips.Add(this);
+        ShipsManager.Instance.allyShips.Add(this);
         base.Start();
     }
     public void MoveToNavPoint(Transform newPositionTransform)
     {
+        _lineRenderer.enabled = true;
+        _lineRenderer.SetPosition(1,newPositionTransform.position);
         if(_navPoint != null){Destroy(_navPoint); }
         
         var navPoint = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -24,6 +29,16 @@ public class AllyShip : Ship
         //_attackTarget = null;
     }
 
+    private void EndMovementToNavPoint()
+    {
+        // La nave ha llegado al destino
+        Debug.Log("La nave ha llegado al destino.");
+        Destroy(_navPoint);
+        _navPoint = null;
+        _isTravellingToNavPoint = false;
+        _lineRenderer.enabled = false;
+    }
+    
     protected void FixedUpdate()
     {
         if (_isTravellingToNavPoint)
@@ -50,11 +65,7 @@ public class AllyShip : Ship
             }
             else
             {
-                // La nave ha llegado al destino
-                Debug.Log("La nave ha llegado al destino.");
-                Destroy(_navPoint);
-                _navPoint = null;
-                _isTravellingToNavPoint = false;
+                EndMovementToNavPoint();
             }
         }
         
@@ -62,15 +73,30 @@ public class AllyShip : Ship
         
     }
 
+    protected void Update()
+    {
+        base.Update();
+        if (_isAttacking)
+        {
+            _lineRenderer.SetPosition(0,gameObject.transform.position);
+            _lineRenderer.SetPosition(1,_attackTarget.transform.position);
+        }
+        else if (_isTravellingToNavPoint)
+        {
+            _lineRenderer.SetPosition(0,gameObject.transform.position);
+        }
+    }
     protected override void DestroyShip()
     {
         Destroy(this.gameObject);
-        ShipsManager.Instance._allyShips.Remove(this);
+        ShipsManager.Instance.allyShips.Remove(this);
     }
 
     public void Attack(GameObject target)
     {
         base.Attack(target);
+        _lineRenderer.enabled = true;
+        _lineRenderer.SetPosition(2,target.transform.position  );
         Destroy(_navPoint);
         _navPoint = null;
     }

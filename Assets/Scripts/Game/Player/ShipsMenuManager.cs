@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 //Script para manejar el menu de la muñeca
-public class MenuHandler : MonoBehaviour
+public class ShipsMenuManager : MonoBehaviour
 {
     //Menu de nave seleccionadas
     [SerializeField] private GameObject _selectedShipsPanel;
@@ -48,7 +48,7 @@ public class MenuHandler : MonoBehaviour
         if (_flagToInteract)
         {
             _flagToInteract = false;
-            Debug.Log("Hola");
+            //Debug.Log("Hola");
             Invoke("RebootCounter", 0.5f);
             _isActive = !_isActive;
             _selectedShipsPanel.SetActive(_isActive);

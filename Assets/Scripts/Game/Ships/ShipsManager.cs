@@ -10,8 +10,8 @@ public class ShipsManager : ASingleton<ShipsManager>
     [SerializeField] public AllyShip selectedAllyShip = null;
     [SerializeField] public EnemyShip selectedEnemyShip = null;
 
-    [HideInInspector] public List<AllyShip> _allyShips;
-    [HideInInspector] public List<EnemyShip> _enemyShips;
+    [HideInInspector] public List<AllyShip> allyShips;
+    [HideInInspector] public List<EnemyShip> enemyShips;
     void Awake()
     {
         base.Awake();
@@ -32,6 +32,24 @@ public class ShipsManager : ASingleton<ShipsManager>
             }
         }
     }
+
+    public void MoveShip(Transform transform)
+    {
+        if (selectedAllyShip != null)
+        {
+            selectedAllyShip.MoveToNavPoint(transform);
+        }
+    }
     
+    public void AllShipsAttack()
+    {
+        if (ShipsManager.Instance.selectedEnemyShip != null)
+        {
+            foreach (var ship in ShipsManager.Instance.allyShips)
+            {
+                ship.Attack(ShipsManager.Instance.selectedEnemyShip.gameObject);
+            }
+        }
+    }
     
 }
