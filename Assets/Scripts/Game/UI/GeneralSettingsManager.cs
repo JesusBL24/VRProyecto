@@ -30,6 +30,7 @@ namespace Patterns.Singleton
             //Obtiene los valores guardados en las preferencias
             Instance.brillo = PlayerPrefs.GetFloat("brillo",0.7f);
             Instance.generalVolume = PlayerPrefs.GetFloat("volume",1f);
+            
         }
         private void Start()
         {
@@ -43,7 +44,7 @@ namespace Patterns.Singleton
             Instance.allAudioSources = FindObjectsOfType<AudioSource>(); //obtener los audioSurces
 
             //Iniciar a valores por defecto o valores guardado
-            ChangeAudioSourcesVolume();
+            //ChangeAudioSourcesVolume();
             changeBrightnessPanel();
         }
         
@@ -59,17 +60,13 @@ namespace Patterns.Singleton
 
         private void ChangeAudioSourcesVolume()
         {
-            foreach (var audio in allAudioSources)
-            {
-                audio.volume = Instance.generalVolume;
-            }
         }
 
         //Función que cambia el brillo de la pantalla
         public void ChangeBrillo(float addEventListenerHandler)
         {
-            PlayerPrefs.SetFloat("brillo", Instance.brillo);
             Instance.brillo = Instance._sliderBrillo.value;
+            PlayerPrefs.SetFloat("brillo", Instance.brillo);
             changeBrightnessPanel();
         }
 

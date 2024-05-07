@@ -67,10 +67,12 @@ public class ControlSettingsManager : MonoBehaviour
         Debug.Log(_actionBindings[2]);
         Debug.Log(_actionBindings[3]);
 
+    }
+
+    private void Start()
+    {
         Rebind();
         CorrectTexts();
-        
-
     }
 
     private void Update()

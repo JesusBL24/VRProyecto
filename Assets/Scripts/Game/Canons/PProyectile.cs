@@ -22,13 +22,16 @@ public class PProyectile : MonoBehaviour
         faction = yourFaction;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        _aliveTime += Time.deltaTime;
-        if(_aliveTime >= _livingTime ){Destroy(this);}
+        if (GameManager.Instance.State == GameManager.GameState.Play)
+        {
+            _aliveTime += Time.fixedDeltaTime;
+            if(_aliveTime >= _livingTime ){Destroy(this);}
         
-        // Mover el proyectil en la dirección hacia adelante
-        transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
+            // Mover el proyectil en la dirección hacia adelante
+            transform.Translate(Vector3.forward * (_speed * Time.fixedDeltaTime));
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -51,10 +51,6 @@ public class MovementSettingsManager : ASingleton<MovementSettingsManager>
         //Turn
         Instance._turnAngleSlider.value = Instance.snapAngle;
         _snapTurnProvider.turnAmount = (Instance._turnAngleSlider.value * 90f);
-        SetDegreesText();
-
-        if (Instance.isSnapActivated) { _changeTypeOfTurnText.text = "Saltos"; }
-        else{_changeTypeOfTurnText.text = "Continuo"; }
         
         //Tunneling
         
@@ -69,6 +65,13 @@ public class MovementSettingsManager : ASingleton<MovementSettingsManager>
             //Transparencia
         Instance._transparencySlider.value = Instance.transparencyValue;
         _tunnelingController.defaultParameters.featheringEffect = Instance.transparencyValue;
+        
+        SetDegreesText();
+        ChangeTypeOfTurn();
+        ChangeTransparency();
+        ChangeSnapAngle();
+        ChangeTunnelingActivation();
+        ChangeTunnelingRatio();
         
     }
     
@@ -122,6 +125,7 @@ public class MovementSettingsManager : ASingleton<MovementSettingsManager>
     public void ChangeTunnelingRatio()
     {
         Instance.tunnelingRatio = Instance._ratioSlider.value;
+        _tunnelingController.defaultParameters.apertureSize = Instance.tunnelingRatio;
         PlayerPrefs.SetFloat("tunnelingRatio", Instance.tunnelingRatio);
     }
     
@@ -129,6 +133,7 @@ public class MovementSettingsManager : ASingleton<MovementSettingsManager>
     public void ChangeTransparency()
     {
         Instance.transparencyValue = Instance._transparencySlider.value;
+        _tunnelingController.defaultParameters.featheringEffect = Instance.transparencyValue;
         PlayerPrefs.SetFloat("transparencyValue", Instance.transparencyValue);
     }
 

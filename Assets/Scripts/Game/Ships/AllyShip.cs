@@ -41,49 +41,54 @@ public class AllyShip : Ship
     
     protected void FixedUpdate()
     {
-        if (_isTravellingToNavPoint)
+        if (GameManager.Instance.State == GameManager.GameState.Play)
         {
-            var _bodyPosition = transform.position;
-            var _navPosition = _navPoint.transform.position;
-            // Calcula la dirección hacia el punto destino
-            Vector3 direccion = (_navPosition - _bodyPosition).normalized;
-
-            // Calcula la distancia al punto destino
-            float distancia = Vector3.Distance(_bodyPosition, _navPosition);
-
-            // Si la distancia es mayor que un umbral pequeño, sigue moviéndote
-            if (distancia > 0.1f)
+            if (_isTravellingToNavPoint)
             {
-                // Calcula la velocidad de desplazamiento en este frame
-                float velocidadFrame = _speed * Time.deltaTime;
+                var _bodyPosition = transform.position;
+                var _navPosition = _navPoint.transform.position;
+                // Calcula la dirección hacia el punto destino
+                Vector3 direccion = (_navPosition - _bodyPosition).normalized;
 
-                // Calcula la nueva posición de la nave
-                Vector3 nuevaPosicion = _bodyPosition + direccion * velocidadFrame;
+                // Calcula la distancia al punto destino
+                float distancia = Vector3.Distance(_bodyPosition, _navPosition);
 
-                // Mueve la nave hacia la nueva posición
-                transform.position = nuevaPosicion;
+                // Si la distancia es mayor que un umbral pequeño, sigue moviéndote
+                if (distancia > 0.1f)
+                {
+                    // Calcula la velocidad de desplazamiento en este frame
+                    float velocidadFrame = _speed * Time.deltaTime;
+
+                    // Calcula la nueva posición de la nave
+                    Vector3 nuevaPosicion = _bodyPosition + direccion * velocidadFrame;
+
+                    // Mueve la nave hacia la nueva posición
+                    transform.position = nuevaPosicion;
+                }
+                else
+                {
+                    EndMovementToNavPoint();
+                }
             }
-            else
-            {
-                EndMovementToNavPoint();
-            }
+        
+            base.FixedUpdate();
         }
-        
-        base.FixedUpdate();
-        
     }
 
     protected void Update()
     {
-        base.Update();
-        if (_isAttacking)
+        if (GameManager.Instance.State == GameManager.GameState.Play)
         {
-            _lineRenderer.SetPosition(0,gameObject.transform.position);
-            _lineRenderer.SetPosition(1,_attackTarget.transform.position);
-        }
-        else if (_isTravellingToNavPoint)
-        {
-            _lineRenderer.SetPosition(0,gameObject.transform.position);
+            base.Update();
+            if (_isAttacking)
+            {
+                _lineRenderer.SetPosition(0,gameObject.transform.position);
+                _lineRenderer.SetPosition(1,_attackTarget.transform.position);
+            }
+            else if (_isTravellingToNavPoint)
+            {
+                _lineRenderer.SetPosition(0,gameObject.transform.position);
+            }
         }
     }
     protected override void DestroyShip()
@@ -96,7 +101,8 @@ public class AllyShip : Ship
     {
         base.Attack(target);
         _lineRenderer.enabled = true;
-        _lineRenderer.SetPosition(2,target.transform.position  );
+        _lineRenderer.SetPosition(0,transform.position  );
+        _lineRenderer.SetPosition(1,target.transform.position  );
         Destroy(_navPoint);
         _navPoint = null;
     }

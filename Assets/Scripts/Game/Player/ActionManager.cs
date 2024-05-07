@@ -7,14 +7,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class ActionManager : MonoBehaviour
+public class ActionManager : ASingleton<ActionManager>
 {
     //Atributos necesarios para gestioanr el juego
     public InputActionAsset _InputActions;
     
-    [SerializeField] private GameObject _leftHand;
+    public GameObject leftHand;
     private TrailRenderer _leftHandTrail;
-    [SerializeField] private GameObject _rightHand;
+    public GameObject rightHand;
     private TrailRenderer _rightHandTrail;
     
     private TrailHandler _trailHandler;  //Script que maneja los trails de las manos
@@ -43,6 +43,9 @@ public class ActionManager : MonoBehaviour
     
     private void Awake()
     {
+
+        base.Awake();
+        
         //Asociar inputActions
         _activateRayR= _InputActions.FindAction("XRI RightHand Interaction/ActivateRayInteractor");
         _activateRayL= _InputActions.FindAction("XRI LeftHand Interaction/ActivateRayInteractor");
@@ -70,8 +73,8 @@ public class ActionManager : MonoBehaviour
 
         //Obtener hadler de trails y los respectivos trails
         _trailHandler = gameObject.GetComponent<TrailHandler>();
-        _leftHandTrail = _leftHand.gameObject.GetComponent<TrailRenderer>();
-        _rightHandTrail = _rightHand.gameObject.GetComponent<TrailRenderer>();
+        _leftHandTrail = leftHand.gameObject.GetComponent<TrailRenderer>();
+        _rightHandTrail = rightHand.gameObject.GetComponent<TrailRenderer>();
     }
 
     private void rayInteractorsHandler(InputAction.CallbackContext context)
@@ -169,7 +172,7 @@ public class ActionManager : MonoBehaviour
     //Funcion para mover la nave a la posicion de la mano
     private void MoveShip()
     {
-        ShipsManager.Instance.MoveShip(_isLeftHand ? _leftHand.transform : _rightHand.transform);
+        ShipsManager.Instance.MoveShip(_isLeftHand ? leftHand.transform : rightHand.transform);
     }
     
     //Funcion para cambiar el tipo de movimiento entre vertical y horizontal

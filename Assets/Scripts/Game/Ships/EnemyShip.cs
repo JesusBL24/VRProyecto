@@ -13,11 +13,22 @@ public class EnemyShip : Ship
 
     protected void Update()
     {
-        if (ShipsManager.Instance.allyShips.Count > 0)
+        if (GameManager.Instance.State == GameManager.GameState.Play)
         {
-            _attackTarget = calculateTarget().gameObject;
+            if (ShipsManager.Instance.allyShips.Count > 0)
+            {
+                _attackTarget = calculateTarget().gameObject;
+            }
+            base.Update();
         }
-        base.Update();
+    }
+
+    protected void FixedUpdate()
+    {
+        if (GameManager.Instance.State == GameManager.GameState.Play)
+        {
+            base.FixedUpdate();
+        }
     }
 
     private AllyShip calculateTarget()

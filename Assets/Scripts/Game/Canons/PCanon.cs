@@ -13,43 +13,52 @@ public class PCanon: MonoBehaviour
 
     public bool isActive;   //Indica si el Cañon activo
 
-    [SerializeField] private AudioHandler _speaker;
+    private AudioHandler _audioHandler;
     
-    [SerializeField] private XRBaseControllerInteractor _leftHand;
-    [FormerlySerializedAs("_RightHand")] [SerializeField] private XRBaseControllerInteractor _rightHand;
+    private XRBaseController _leftHand;
+    private XRBaseController _rightHand;
     
     private float _shotTimer;   //Contador de tiempo tras el ultimo disparo
     private GameObject _target; //Objetivo del cañon
     private GameObject _player;
 
+    [SerializeField][Range(0,1)]private float _intensity;
+    [SerializeField]private float _duration;
+
     private void Start()
     {
+        _leftHand = ActionManager.Instance.leftHand.GetComponent<XRBaseController>();
+        _rightHand = ActionManager.Instance.rightHand.GetComponent<XRBaseController>();
         _shotTimer = 0;
         isActive = false;
         _player = GameObject.FindGameObjectWithTag("Player");
+        _audioHandler = gameObject.GetComponentInParent<AudioHandler>();
         Debug.Log(_player);
     }
 
     void Update()
     {
-        //El cañon solo dispara si está activo
-        if (isActive)
+        if (GameManager.Instance.State == GameManager.GameState.Play)
         {
-            //Si no hay target, desactivar
-            if(_target == null ){Deactivate();}
-            else
+            //El cañon solo dispara si está activo
+            if (isActive)
             {
-                // Actualizar el temporizador
-                _shotTimer += Time.deltaTime;
-
-                // Verificar si se puede disparar según la cadencia
-                if (_shotTimer >= _shotRate)
+                //Si no hay target, desactivar
+                if(_target == null ){Deactivate();}
+                else
                 {
-                    // Disparar
-                    Shot();
+                    // Actualizar el temporizador
+                    _shotTimer += Time.deltaTime;
 
-                    // Reiniciar el temporizador
-                    _shotTimer = 0f;
+                    // Verificar si se puede disparar según la cadencia
+                    if (_shotTimer >= _shotRate)
+                    {
+                        // Disparar
+                        Shot();
+
+                        // Reiniciar el temporizador
+                        _shotTimer = 0f;
+                    }
                 }
             }
         }
@@ -57,7 +66,7 @@ public class PCanon: MonoBehaviour
     private void Shot()
     {
         ShotHapticFeedback();
-        _speaker.PlayClip(0);
+        _audioHandler.PlayClip(0);
         // Obtener la rotación hacia el objetivo
         Quaternion rotation = Quaternion.LookRotation(_target.transform.position - transform.position, Vector3.up);
         
@@ -86,8 +95,8 @@ public class PCanon: MonoBehaviour
         var distance = Vector3.Distance(_player.transform.position, transform.position);
         if (distance < 3f)
         {
-            _rightHand?.SendHapticImpulse(0.3f, 0.5f);
-            _leftHand?.SendHapticImpulse(0.3f, 0.5f);
+            _rightHand?.SendHapticImpulse(_intensity, _duration);
+            _leftHand?.SendHapticImpulse(_intensity, _duration);
         }
     }
 }
