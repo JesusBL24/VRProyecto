@@ -13,12 +13,12 @@ public class EnemyShip : Ship
 
     protected void Update()
     {
+        if (ShipsManager.Instance.allyShips.Count > 0)
+        {
+            calculateTarget();
+        }
         if (GameManager.Instance.State == GameManager.GameState.Play)
         {
-            if (ShipsManager.Instance.allyShips.Count > 0)
-            {
-                _attackTarget = calculateTarget().gameObject;
-            }
             base.Update();
         }
     }
@@ -31,30 +31,40 @@ public class EnemyShip : Ship
         }
     }
 
-    private AllyShip calculateTarget()
+    private void calculateTarget()
     {
         float min = 1000;
         AllyShip shipToAttack = null;
         
         foreach (var ship in ShipsManager.Instance.allyShips)
         {
-            var distance = Vector3.Distance(ship.transform.position, transform.position);
-            if ( distance < min)
+            if (ship != null)
             {
-                shipToAttack = ship;
-                min = distance;
+                var distance = Vector3.Distance(ship.transform.position, transform.position);
+                if ( distance < min)
+                {
+                    shipToAttack = ship;
+                    min = distance;
+                }
             }
         }
-            
-        
 
-        return shipToAttack;
+
+        if (shipToAttack != null)
+        {
+            _attackTarget = shipToAttack.gameObject;
+            if (min <= _attackRange)
+            {
+                Fire();
+            }
+        }
     }
     
     protected override void DestroyShip()
     {
-        Destroy(this.gameObject);
+        GameManager.OnGameStateChanged -= GrabActivation;
         ShipsManager.Instance.enemyShips.Remove(this);
+        Destroy(this.gameObject);
     }
     
 }

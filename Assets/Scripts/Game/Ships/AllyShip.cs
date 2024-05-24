@@ -6,27 +6,43 @@ using UnityEngine.UIElements;
 public class AllyShip : Ship
 {
     private LineRenderer _lineRenderer;
+    private GameObject _navPoint;
     void Start()
     {
         _lineRenderer = gameObject.GetComponent<LineRenderer>();
         faction = 0;
         ShipsManager.Instance.allyShips.Add(this);
+        _navPoint = null;
         base.Start();
     }
     public void MoveToNavPoint(Transform newPositionTransform)
     {
-        _lineRenderer.enabled = true;
-        _lineRenderer.SetPosition(1,newPositionTransform.position);
         if(_navPoint != null){Destroy(_navPoint); }
         
         var navPoint = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        navPoint.GetComponent<BoxCollider>().enabled = false;
+        navPoint.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
         navPoint.transform.position = newPositionTransform.position;
         navPoint.transform.localScale = new Vector3(0.2f, 0.2f,0.2f);
         
         _navPoint = navPoint;
+        
+        _lineRenderer.enabled = true;
+        StablishLineRenderer();
+        
         _isTravellingToNavPoint = true;
         _isMovingToTarget = false;
         //_attackTarget = null;
+    }
+
+    private void StablishLineRenderer()
+    {
+        _lineRenderer.SetPosition(0,transform.position);
+        _lineRenderer.SetPosition(1,_navPoint.transform.position);
+    }
+    public void OnReleaseGRab()
+    {
+        StablishLineRenderer();
     }
 
     private void EndMovementToNavPoint()
@@ -93,8 +109,10 @@ public class AllyShip : Ship
     }
     protected override void DestroyShip()
     {
-        Destroy(this.gameObject);
+        GameManager.OnGameStateChanged -= GrabActivation;
         ShipsManager.Instance.allyShips.Remove(this);
+        if(_navPoint != null){Destroy(_navPoint);}
+        Destroy(this.gameObject);
     }
 
     public void Attack(GameObject target)

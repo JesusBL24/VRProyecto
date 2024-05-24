@@ -23,7 +23,6 @@ public abstract class Ship : MonoBehaviour
     
     //Atributos de movimiento
     [SerializeField] protected float _speed;
-    protected GameObject _navPoint;
     [SerializeField] protected float _rotationSpeed;
     protected bool _isTravellingToNavPoint = false;
     protected bool _isMovingToTarget = false;
@@ -37,7 +36,8 @@ public abstract class Ship : MonoBehaviour
     [SerializeField] protected List<PCanon> canons;
     
     //Atributos de interaccion
-    protected XRSimpleInteractable _interactable;
+    protected XRSimpleInteractable _simpleInteractable;
+    protected XRGrabInteractable _grabInteractable;
 
     public string GetShipType()
     {
@@ -58,8 +58,8 @@ public abstract class Ship : MonoBehaviour
     {
         _actualHealth = _maxHealth;
         _healthBar.UpdateHealthBar(_actualHealth,_maxHealth);
-        _interactable = GetComponent<XRSimpleInteractable>();
-        _navPoint = null;
+        _simpleInteractable = GetComponent<XRSimpleInteractable>();
+        _grabInteractable = GetComponent<XRGrabInteractable>();
         
         //Creación de una esfera que indica el attackRange
         // Crea una esfera primitiva
@@ -74,9 +74,12 @@ public abstract class Ship : MonoBehaviour
         
         Destroy(_attackRangeSphere.GetComponent<Collider>()); //Destruye el collider
         _attackRangeSphere.GetComponent<MeshRenderer>().material = _attackRangeMaterial; //Asocia el material 
+        
         _attackRangeSphere.SetActive(false);
 
         _speaker = gameObject.GetComponent<AudioHandler>();
+        GameManager.OnGameStateChanged += GrabActivation;
+        GrabActivation(GameManager.Instance.State);
     }
     
 
@@ -105,6 +108,24 @@ public abstract class Ship : MonoBehaviour
         }
     }
 
+    protected void GrabActivation(GameManager.GameState gameState)
+    {
+        if (gameState == GameManager.GameState.Play)
+        {
+            if (gameObject != null)
+            {
+                _grabInteractable.enabled = false;
+            }
+        }
+        else
+        {
+            if (gameObject != null)
+            {
+                _grabInteractable.enabled = true;
+            }
+        }
+    }
+    
     protected void Update()
     {
         var hasTarget = (_attackTarget != null);

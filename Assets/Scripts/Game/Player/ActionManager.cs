@@ -151,18 +151,14 @@ public class ActionManager : ASingleton<ActionManager>
             Debug.Log(id + ", " + gestureCompletionData.similarity);
             if (id == 0)
             {
-                ChangeMovement(id);
+                ChangeMovement();
             }
             else if (id == 1)
-            {
-                ChangeMovement(id);
-            }
-            else if (id == 2)
             {
                 ShipsManager.Instance.AllShipsAttack();
             }
             
-            else if (id == 3)
+            else if (id == 2)
             {
                 MoveShip();
             }
@@ -176,15 +172,8 @@ public class ActionManager : ASingleton<ActionManager>
     }
     
     //Funcion para cambiar el tipo de movimiento entre vertical y horizontal
-    private void ChangeMovement(int index)
+    private void ChangeMovement()
     {
-        if (index == 1)
-        {
-            _playerFly.enabled = true;
-        }
-        else
-        {
-            _playerFly.enabled =  false;
-        }
+        _playerFly.enabled = !_playerFly.enabled;
     }
 }

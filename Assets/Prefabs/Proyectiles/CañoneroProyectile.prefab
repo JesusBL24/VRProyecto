@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Ca\xF1oneroProyectile"
       objectReference: {fileID: 0}
+    - target: {fileID: 8453647857814875976, guid: cb04e57b230f2a645a529a6fe3a0e930, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

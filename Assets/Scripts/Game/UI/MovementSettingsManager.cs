@@ -66,6 +66,7 @@ public class MovementSettingsManager : ASingleton<MovementSettingsManager>
         Instance._transparencySlider.value = Instance.transparencyValue;
         _tunnelingController.defaultParameters.featheringEffect = Instance.transparencyValue;
         
+        Instance.isSnapActivated = !Instance.isSnapActivated;
         SetDegreesText();
         ChangeTypeOfTurn();
         ChangeTransparency();

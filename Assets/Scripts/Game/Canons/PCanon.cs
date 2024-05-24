@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using UnityEngine.Serialization;
-
+//Script basico de cañon
 public class PCanon: MonoBehaviour
 {
     [SerializeField] private float _shotRate;  //Cadencia de disparo
@@ -15,6 +15,7 @@ public class PCanon: MonoBehaviour
 
     private AudioHandler _audioHandler;
     
+    //Mandos
     private XRBaseController _leftHand;
     private XRBaseController _rightHand;
     
@@ -63,6 +64,8 @@ public class PCanon: MonoBehaviour
             }
         }
     }
+    
+    //Funciona para disparar
     private void Shot()
     {
         ShotHapticFeedback();
@@ -90,6 +93,7 @@ public class PCanon: MonoBehaviour
         _shotTimer = 0f;
     }
 
+    //Funcion para mandar vibracion a los mandos
     private void ShotHapticFeedback()
     {
         var distance = Vector3.Distance(_player.transform.position, transform.position);

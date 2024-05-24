@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script basico de Proyectil
 public class PProyectile : MonoBehaviour
 {
     [SerializeField] private float _speed; // Velocidad del proyectil

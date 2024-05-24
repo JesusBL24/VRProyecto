@@ -17,11 +17,6 @@ public class GameManager : ASingleton<GameManager>
     private void Awake()
     {
         base.Awake();
-    }
-
-    private void Start()
-    {
-        //Al Iniciar genera el grid
         ChangeState(GameState.SetUnits);
     }
 
